@@ -19,6 +19,27 @@ tools.push({
       : 'No edge at these odds. Skip it.';
   }
 });
+tools.push({
+  name: 'Poisson',
+  html: `
+    <label>Home expected goals <input id="lh" type="number" value="1.6" step="0.05"></label>
+    <label>Away expected goals <input id="la" type="number" value="1.1" step="0.05"></label>
+    <div id="out"></div>`,
+  run() {
+    const pm = (l, k) => { let p = Math.exp(-l); for (let i = 1; i <= k; i++) p *= l / i; return p; };
+    const lh = +$('lh').value, la = +$('la').value;
+    let H = 0, D = 0, A = 0, O = 0, B = 0;
+    for (let i = 0; i <= 9; i++) for (let j = 0; j <= 9; j++) {
+      const p = pm(lh, i) * pm(la, j);
+      if (i > j) H += p; else if (i === j) D += p; else A += p;
+      if (i + j > 2) O += p;
+      if (i && j) B += p;
+    }
+    const row = (n, p) => `${n}: <strong>${(p * 100).toFixed(1)}%</strong> (fair odds ${(1 / p).toFixed(2)})<br>`;
+    $('out').innerHTML = row('Home win', H) + row('Draw', D) + row('Away win', A)
+      + row('Over 2.5', O) + row('Under 2.5', 1 - O) + row('Both teams score', B);
+  }
+});
 
 function show(i) {
   const t = tools[i];
