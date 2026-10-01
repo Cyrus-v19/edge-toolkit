@@ -1,0 +1,8 @@
+body{font-family:system-ui,sans-serif;background:#0f1a24;color:#e6eef4;max-width:520px;margin:auto;padding:16px}
+h1{margin:0 0 12px}
+nav{display:flex;gap:8px;overflow-x:auto;margin-bottom:16px}
+nav button{padding:8px 14px;border-radius:20px;border:1px solid #2a3e4f;background:#172733;color:inherit}
+nav button.on{background:#4cc3cc;color:#0f1a24}
+label{display:block;margin-bottom:12px;color:#8fa3b5;font-size:14px}
+input{display:block;width:100%;padding:10px;margin-top:4px;font-size:16px;border-radius:8px;border:1px solid #2a3e4f;background:#172733;color:#e6eef4;box-sizing:border-box}
+#out{background:#172733;border-radius:12px;padding:14px;font-size:18px;line-height:1.6}
